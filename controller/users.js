@@ -1,4 +1,5 @@
 const users = require("../data/index")
+// const createUser = require("../data/sampleUser")
 
 //getAll
 const list = (req,res) => {
@@ -22,15 +23,12 @@ const show = (req, res) =>{
 
 const create = (req, res) => {
     const {body} = req
-    // console.log(body.body)
-
     const user = {
         id: users.length + 1,
-        ...body,
-        postId: 1
+        ...body
     }
     users.push(user)
-    res.json(users)
+    res.json(user)
 }
 
 const update = (req, res) => {
@@ -40,9 +38,12 @@ const update = (req, res) => {
         return user.id === Number(id)
     })
     if(foundUser){
+        const index = users.indexOf(foundUser)
         const updateUsers = {
+            ...foundUser,
             ...req.body
         }
+        users.splice(index, 1, updateUsers)
         res.json(updateUsers)
     }
         else{
@@ -60,7 +61,8 @@ const deleteUser = (req, res) => {
         return user.id === Number(id)
     })
     if(foundUser != -1){
-        users.splice(foundUser, 1)
+        const index = users.indexOf(foundUser)
+        users.splice(index, 1)
         res.json({message: "User Deleted"})
     }
     else{

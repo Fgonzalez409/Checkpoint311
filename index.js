@@ -5,7 +5,9 @@ const port = process.env.PORT || 4000
 const usersRouter = require('./routes/users')
 
 
+app.use(express.json())
 app.use('/', usersRouter)
+
 
 
 app.listen(port, () => {

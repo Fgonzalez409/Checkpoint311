@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router()
 const usersControllers = require("../controller/users")
+// const createUserController = require("../controller/users")
 
 
 //get all users
@@ -10,7 +11,7 @@ router.get("/users", usersControllers.list)
 router.get("/users/:id", usersControllers.show )
 
 //create user
-router.post("/", usersControllers.create)
+router.post("/users", usersControllers.create)
 
 //update user
 router.put('/users/:id', usersControllers.update)
